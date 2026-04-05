@@ -1,0 +1,16 @@
+{
+  "Author": "Mbobchin",
+  "Name": "MacroVault",
+  "InternalName": "MacroVault",
+  "AssemblyVersion": "1.0.0.0",
+  "Punchline": "Export your in-game macros to Discord for archival.",
+  "Description": "MacroVault lets you send your FFXIV macros to a Discord channel via webhook.\n\nCommands:\n/mvexport — export the currently selected macro\n/mvbackup — export all non-empty macros (both tabs)\n/mv — open the settings window",
+  "ApplicableVersion": "any",
+  "Tags": [
+    "macro",
+    "discord",
+    "export",
+    "backup",
+    "utility"
+  ]
+}
