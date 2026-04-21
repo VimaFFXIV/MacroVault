@@ -3,6 +3,13 @@ using Dalamud.Configuration;
 
 namespace MacroVault;
 
+public enum MacroFormat
+{
+    CodeBlock  = 0,   // ```\ncommands\n```  — syntax-highlighted, less searchable
+    PlainText  = 1,   // bare lines          — fully searchable, easiest to copy-paste
+    QuoteBlock = 2,   // > command           — searchable + Discord left-bar visual
+}
+
 [Serializable]
 public class Configuration : IPluginConfiguration
 {
@@ -16,6 +23,9 @@ public class Configuration : IPluginConfiguration
 
     /// <summary>Whether to include macros with no name (only raw lines).</summary>
     public bool IncludeUnnamedMacros { get; set; } = true;
+
+    /// <summary>How macro command lines are formatted in Discord messages.</summary>
+    public MacroFormat Format { get; set; } = MacroFormat.PlainText;
 
     public void Save() => Plugin.PluginInterface.SavePluginConfig(this);
 }

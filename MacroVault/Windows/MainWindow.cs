@@ -327,6 +327,50 @@ public class MainWindow : Window
         ImGui.Spacing();
         ImGui.Separator();
         ImGui.Spacing();
+
+        ImGui.Text("Discord message format:");
+        ImGui.Spacing();
+
+        // Code block option
+        var fmt = _config.Format;
+        if (ImGui.RadioButton("Code block  (```...```)", fmt == MacroFormat.CodeBlock))
+        {
+            _config.Format = MacroFormat.CodeBlock;
+            _config.Save();
+        }
+        if (ImGui.IsItemHovered())
+            ImGui.SetTooltip("Commands are wrapped in a code block.\nLooks clean but Discord search may not surface results reliably.");
+
+        ImGui.SameLine();
+        ImGui.TextDisabled("  e.g.  ```/ac \"Fast Blade\" <t>```");
+
+        // Plain text option
+        if (ImGui.RadioButton("Plain text  (recommended for search)", fmt == MacroFormat.PlainText))
+        {
+            _config.Format = MacroFormat.PlainText;
+            _config.Save();
+        }
+        if (ImGui.IsItemHovered())
+            ImGui.SetTooltip("Commands appear as normal text.\nFully indexed by Discord search and easy to copy-paste.");
+
+        ImGui.SameLine();
+        ImGui.TextDisabled("  e.g.  /ac \"Fast Blade\" <t>");
+
+        // Quote block option
+        if (ImGui.RadioButton("Quote block  (> prefix)", fmt == MacroFormat.QuoteBlock))
+        {
+            _config.Format = MacroFormat.QuoteBlock;
+            _config.Save();
+        }
+        if (ImGui.IsItemHovered())
+            ImGui.SetTooltip("Each command line is prefixed with > (Discord quote).\nSearchable and visually distinct with a coloured sidebar bar.");
+
+        ImGui.SameLine();
+        ImGui.TextDisabled("  e.g.  > /ac \"Fast Blade\" <t>");
+
+        ImGui.Spacing();
+        ImGui.Separator();
+        ImGui.Spacing();
         ImGui.TextDisabled("Commands:");
         ImGui.TextDisabled("  /mvexport  \u2014 export the currently selected macro");
         ImGui.TextDisabled("  /mvbackup  \u2014 backup all macros (same as Quick Backup tab)");

@@ -174,7 +174,7 @@ public sealed class MacroExporter : IDisposable
 
     // ── Formatting ────────────────────────────────────────────────────────────
 
-    private static string FormatMacro(MacroInfo info, int? queuePosition)
+    private string FormatMacro(MacroInfo info, int? queuePosition)
     {
         var sb = new StringBuilder();
 
@@ -187,10 +187,34 @@ public sealed class MacroExporter : IDisposable
             sb.Append($" \u2014 {info.Name}");
         sb.AppendLine("**");
 
-        sb.AppendLine("```");
-        foreach (var line in info.Lines)
-            sb.AppendLine(line);
-        sb.Append("```");
+        switch (_config.Format)
+        {
+            case MacroFormat.CodeBlock:
+                sb.AppendLine("```");
+                foreach (var line in info.Lines)
+                    sb.AppendLine(line);
+                sb.Append("```");
+                break;
+
+            case MacroFormat.QuoteBlock:
+                foreach (var line in info.Lines)
+                    sb.AppendLine($"> {line}");
+                // Trim the trailing newline so chunks pack tighter
+                if (sb.Length > 0 && sb[sb.Length - 1] == '\n')
+                    sb.Length--;
+                if (sb.Length > 0 && sb[sb.Length - 1] == '\r')
+                    sb.Length--;
+                break;
+
+            default: // PlainText
+                foreach (var line in info.Lines)
+                    sb.AppendLine(line);
+                if (sb.Length > 0 && sb[sb.Length - 1] == '\n')
+                    sb.Length--;
+                if (sb.Length > 0 && sb[sb.Length - 1] == '\r')
+                    sb.Length--;
+                break;
+        }
 
         return sb.ToString();
     }
