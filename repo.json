@@ -14,7 +14,7 @@
     "IsTestingExclusive": false,
     "RepoUrl": "https://github.com/VimaFFXIV/MacroVault",
     "ApplicableVersion": "any",
-    "DalamudApiLevel": 14,
+    "DalamudApiLevel": 15,
     "TestingDalamudApiLevel": 0,
     "DownloadCount": 0,
     "LastUpdate": 1743984000,
