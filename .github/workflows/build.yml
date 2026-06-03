@@ -19,11 +19,11 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.x'
+          dotnet-version: '10.x'
 
       - name: Download Dalamud
         run: |
-          wget -q https://goatcorp.github.io/dalamud-distrib/stg/latest.zip -O /tmp/dalamud.zip
+          wget -q https://goatcorp.github.io/dalamud-distrib/latest.zip -O /tmp/dalamud.zip
           unzip -q /tmp/dalamud.zip -d /tmp/dalamud
 
       - name: Restore
